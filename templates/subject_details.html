@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block title %}
+Subject Details
+{% endblock title %}
+
+
+
+{% block body %}
+ <h3 class="text-center"><span>Subject Details</span> </h3>
+  
+{% with messages=get_flashed_messages(with_categories=true) %}
+{% if messages %}
+{% for category, message in messages %}
+
+<div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+    {{message}}
+
+
+</div>
+  {% endfor %}
+  {% endif %}
+  {% endwith %}
+<br>
+
+
+<table class="table">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">SUBJECT ID</th>
+      <th scope="col">SUBJECT NAME</th>
+      <th scope="col">FACULTY NAME</th>
+      <th scope="col">EDIT</th>
+      <th scope="col">DELETE</th>
+      
+
+    </tr>
+  </thead>
+  <tbody>
+  {% for post in query %}
+    <tr>
+      <th scope="row">{{post.subid}}</th>
+      <td>{{post.subname}}</td>
+      <td>{{post.fname}}</td>
+    <td><a href="/editfac/{{post.id}}"><button class="btn btn-primary">Edit </button> </a> </td>
+    <td><a href="/deletefac/{{post.id}}"><button onclick="return confirm('Are you sure to Delete data');" class="btn btn-danger">Delete </button> </a> </td>
+    </tr>
+{% endfor %}
+  
+  </tbody>
+</table>
+
+
+
+
+
+
+{% endblock body %}
